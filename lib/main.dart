@@ -32,7 +32,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Despesas Pessoais'),
+        title: const Text('Despesas Pessoais'),
       ),
       body: Column(
         mainAxisAlignment:
@@ -53,15 +53,24 @@ class MyHomePage extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
+                        //Possibilidade de estilizar
                         margin:
                             EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                         decoration: BoxDecoration(
                             border: Border.all(
-                          color: Colors.black,
+                          color: Colors.purple,
                           width: 2,
                         )),
-                        padding: EdgeInsets.all(10),
-                        child: Text(tr.value.toString()),
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          tr.value.toString(),
+                          // ignore: prefer_const_constructors
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purple,
+                          ),
+                        ),
                       ),
                       Column(
                         children: [Text(tr.title), Text(tr.date.toString())],
