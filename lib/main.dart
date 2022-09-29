@@ -40,14 +40,20 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            child: Card(
+            child: const Card(
               color: Colors.blue,
               child: Text('Grafico'),
               elevation: 5,
             ),
           ),
-          Card(
-            child: Text('Lista de transações'),
+          Column(
+            children: [
+              ..._transactions.map((tr) {
+                return Card(
+                  child: Text(tr.title),
+                );
+              }).toList(),
+            ],
           )
         ],
       ),
