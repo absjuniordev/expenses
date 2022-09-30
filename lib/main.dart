@@ -2,7 +2,7 @@ import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-void main() => runApp(ExpensesApp());
+void main() => runApp(const ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
   const ExpensesApp({super.key});
@@ -36,16 +36,12 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Despesas Pessoais'),
       ),
       body: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceAround, //parametriza os espaços da colunas
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            child: const Card(
-              color: Colors.blue,
-              child: Text('Grafico'),
-              elevation: 5,
-            ),
+          const Card(
+            color: Colors.blue,
+            child: Text('Grafico'),
+            elevation: 5,
           ),
           Column(
             children: [
@@ -93,7 +89,32 @@ class MyHomePage extends StatelessWidget {
                 );
               }).toList(),
             ],
-          )
+          ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              //Apropiado para envolver
+              padding: const EdgeInsets.all(10),
+              child: Column(children: [
+                const TextField(
+                  decoration: InputDecoration(labelText: 'Titulo'),
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: 'Valor (R\$)'),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(primary: Colors.purple),
+                      onPressed: () {},
+                      child: const Text('Nova Transação'),
+                    ),
+                  ],
+                )
+              ]),
+            ),
+          ),
         ],
       ),
     );
