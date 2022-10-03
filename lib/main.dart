@@ -16,7 +16,10 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+  // MyHomePage({super.key});
+
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
 
   final _transactions = [
     Transaction(
@@ -25,7 +28,11 @@ class MyHomePage extends StatelessWidget {
         value: 310.76,
         date: DateTime.now()),
     Transaction(
-        id: 't2', title: 'Conta de Luz', value: 211.30, date: DateTime.now()),
+      id: 't2',
+      title: 'Conta de Luz',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
   ];
 
   @override
@@ -96,10 +103,12 @@ class MyHomePage extends StatelessWidget {
               //Apropiado para envolver
               padding: const EdgeInsets.all(10),
               child: Column(children: [
-                const TextField(
+                TextField(
+                  controller: titleController,
                   decoration: InputDecoration(labelText: 'Titulo'),
                 ),
-                const TextField(
+                TextField(
+                  controller: valueController,
                   decoration: InputDecoration(labelText: 'Valor (R\$)'),
                 ),
                 Row(
@@ -107,7 +116,10 @@ class MyHomePage extends StatelessWidget {
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(primary: Colors.purple),
-                      onPressed: () {},
+                      onPressed: () {
+                        print(titleController.text);
+                        print(valueController.text);
+                      },
                       child: const Text('Nova Transação'),
                     ),
                   ],
