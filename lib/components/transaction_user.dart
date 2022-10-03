@@ -24,12 +24,6 @@ class _TransactionUserState extends State<TransactionUser> {
       value: 211.30,
       date: DateTime.now(),
     ),
-    Transaction(
-      id: 't3',
-      title: 'Conta de Energia',
-      value: 50,
-      date: DateTime.now(),
-    ),
   ];
 
   @override
