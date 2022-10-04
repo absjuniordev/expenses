@@ -21,9 +21,15 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Despesas Pessoais'),
-      ),
+          centerTitle: true,
+          title: const Text('Despesas Pessoais'),
+          actions: [
+            IconButton(
+              //Criação do botão superior
+              icon: const Icon(Icons.add),
+              onPressed: () {},
+            )
+          ]),
       body: SingleChildScrollView(
         //Funcção para rolar os itens
         child: Column(
@@ -38,6 +44,12 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        //Criação do botão inferior
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
