@@ -8,14 +8,14 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  // MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,13 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Card(
+        children: const [
+          Card(
             color: Colors.blue,
-            child: Text('Grafico'),
             elevation: 5,
+            child: Text('Grafico'),
           ),
-          TransactionUser(),
+          TransactionUser(), //#1 - contem as funcões excenciais
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'transaction_form.dart';
 import 'transaction_list.dart';
@@ -26,12 +28,27 @@ class _TransactionUserState extends State<TransactionUser> {
     ),
   ];
 
+  _addTransations(String title, double value) {
+    //#4
+    final newTransation = Transaction(
+        id: Random().nextDouble().toString(),
+        title: title,
+        value: value,
+        date: DateTime.now());
+
+    setState(() {
+      _transactions.add(newTransation); //#5
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionList(_transactions),
-        TransactionForm(),
+        TransactionList(
+            _transactions), //#2 - é chamado para mostrar tudo que contem salvo em '_transactions'
+        TransactionForm(_addTransations), //(Passa uma função para receber dados
+        //)#3 - fica ocioso aguardando a adção
       ],
     );
   }
