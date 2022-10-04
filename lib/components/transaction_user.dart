@@ -26,36 +26,6 @@ class _TransactionUserState extends State<TransactionUser> {
       value: 211.30,
       date: DateTime.now(),
     ),
-    Transaction(
-      id: 't3',
-      title: 'Conta de #02',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't4',
-      title: 'Conta de #03',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't5',
-      title: 'Conta de #04',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't6',
-      title: 'Conta de #05',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't7',
-      title: 'Conta de #06',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
   ];
 
   _addTransations(String title, double value) {
@@ -75,7 +45,8 @@ class _TransactionUserState extends State<TransactionUser> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionForm(_addTransations), //(Passa uma função para receber dados
+        TransactionForm(
+            _addTransations), //Recebe os dados por contrutor e insere no '_addTransations'
         TransactionList(
             _transactions), //#2 - é chamado para mostrar tudo que contem salvo em '_transactions'
         //)#3 - fica ocioso aguardando a adção
