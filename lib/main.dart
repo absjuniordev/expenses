@@ -52,6 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transactions.add(newTransation); //#5
     });
+
+    Navigator.of(context).pop(); //Ocultar/Fechar/Desempilhar
   }
 
   _openTransactionFormModal(BuildContext context) {
