@@ -12,8 +12,12 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    return MaterialApp(
+      home: const MyHomePage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+            .copyWith(secondary: Colors.amber[700]),
+      ),
     );
   }
 }
@@ -83,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              child: Card(
+              child: const Card(
                 color: Colors.blue,
                 elevation: 5,
                 child: Text('Grafico'),

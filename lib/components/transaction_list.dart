@@ -28,7 +28,8 @@ class TransactionList extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: BoxDecoration(
                       border: Border.all(
-                    color: Colors.purple,
+                    color: Theme.of(context)
+                        .primaryColor, //pega a cor principal do thema
                     width: 2,
                   )),
                   padding: const EdgeInsets.all(10),
@@ -38,7 +39,7 @@ class TransactionList extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
