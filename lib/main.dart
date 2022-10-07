@@ -1,7 +1,7 @@
 import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'components/transaction_form.dart';
+//import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 
@@ -15,8 +15,28 @@ class ExpensesApp extends StatelessWidget {
     return MaterialApp(
       home: const MyHomePage(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: Colors.amber[700]),
+        colorScheme:
+            ColorScheme.fromSwatch(primarySwatch: Colors.purple) //cor do tema
+                .copyWith(secondary: Colors.amber[700]), //cor do botão
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+                //#2 opção para mudar as demais fontes
+                titleLarge: const TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+        appBarTheme: AppBarTheme(
+          titleTextStyle: ThemeData.light()
+              .textTheme
+              .copyWith(
+                titleLarge: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              )
+              .headline6,
+        ),
       ),
     );
   }
@@ -71,9 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Despesas Pessoais'),
+      appBar: AppBar(centerTitle: true, title: Text('Despesas Pessoais'),
+          // titleTextStyle: const TextStyle(fontFamily: 'OpenSans'),
           actions: [
             IconButton(
               //Criação do botão superior
