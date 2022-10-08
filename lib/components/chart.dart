@@ -2,8 +2,10 @@ import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Chhart extends StatelessWidget {
+class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
+
+  const Chart(this.recentTransactions, {super.key});
 
   List<Map<String, Object>> get groupTransactions {
     return List.generate(7, (index) {
@@ -33,10 +35,9 @@ class Chhart extends StatelessWidget {
     });
   }
 
-  const Chhart(this.recentTransactions, {super.key});
-
   @override
   Widget build(BuildContext context) {
+    groupTransactions;
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(20),
