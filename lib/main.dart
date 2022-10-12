@@ -21,12 +21,13 @@ class ExpensesApp extends StatelessWidget {
                 .copyWith(secondary: Colors.amber[700]), //cor do botão
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-                //#2 opção para mudar as demais fontes
-                titleLarge: const TextStyle(
-              fontFamily: 'OpenSans',
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            )),
+              //#2 opção para mudar as demais fontes
+              titleLarge: const TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
         appBarTheme: AppBarTheme(
           titleTextStyle: ThemeData.light()
               .textTheme
