@@ -10,73 +10,69 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 520,
-      //equação ternaria para mostrar a imagem ou a lista
-      child: transactions.isEmpty
-          ? Column(
-              children: [
-                const SizedBox(
-                  height: 15,
+    return transactions.isEmpty
+        ? Column(
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'Nenhuma transação cadastrada',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const SizedBox(
+                //definição de espaços
+                height: 20,
+              ),
+              SizedBox(
+                height: 200,
+                child: Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
                 ),
-                Text(
-                  'Nenhuma transação cadastrada',
-                  style: Theme.of(context).textTheme.headline6,
+              )
+            ],
+          )
+        : ListView.builder(
+            //' ListView.builder' definição dos elementos necessarios a serem exibidos -pouca memeoria do celular
+            itemCount: transactions.length,
+            //Tamanho
+            itemBuilder: (ctx, index)
+                //Define o que sera mostrado - otimização
+                {
+              final tr = transactions[index];
+              return Card(
+                elevation: 5,
+                margin: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 5,
                 ),
-                const SizedBox(
-                  //definição de espaços
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            )
-          : ListView.builder(
-              //' ListView.builder' definição dos elementos necessarios a serem exibidos -pouca memeoria do celular
-              itemCount: transactions.length,
-              //Tamanho
-              itemBuilder: (ctx, index)
-                  //Define o que sera mostrado - otimização
-                  {
-                final tr = transactions[index];
-                return Card(
-                  elevation: 5,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 5,
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.purple,
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6),
-                        child: FittedBox(
-                          child: Text('R\$${tr.value}'),
-                        ),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.purple,
+                    radius: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: FittedBox(
+                        child: Text('R\$${tr.value}'),
                       ),
                     ),
-                    title: Text(
-                      tr.title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    subtitle: Text(
-                      DateFormat('d MMM y').format(tr.date),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      color: Theme.of(context).errorColor,
-                      onPressed: () => onRemove(tr.id),
-                    ),
                   ),
-                );
-              },
-            ),
-    );
+                  title: Text(
+                    tr.title,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  subtitle: Text(
+                    DateFormat('d MMM y').format(tr.date),
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    color: Theme.of(context).errorColor,
+                    onPressed: () => onRemove(tr.id),
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

@@ -88,35 +88,47 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (_) {
-          return TransactionForm(_addTransations);
-        });
+      context: context,
+      builder: (_) {
+        return TransactionForm(_addTransations);
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      centerTitle: true,
+      title: const Text(
+        'Despesas Pessoais',
+      ),
+      actions: [
+        IconButton(
+          //Criação do botão superior
+          icon: const Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context),
+        )
+      ],
+    );
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            'Despesas Pessoais',
-          ),
-          // titleTextStyle: const TextStyle(fontFamily: 'OpenSans'),
-          actions: [
-            IconButton(
-              //Criação do botão superior
-              icon: const Icon(Icons.add),
-              onPressed: () => _openTransactionFormModal(context),
-            )
-          ]),
+      appBar: appBar,
       body: SingleChildScrollView(
         //Funcção para rolar os itens
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_recentTransactions),
-            TransactionList(_transactions, _removeTransaction),
+            SizedBox(
+              height: availableHeight * 0.25,
+              child: Chart(_recentTransactions),
+            ),
+            SizedBox(
+              height: availableHeight * 0.75,
+              child: TransactionList(_transactions, _removeTransaction),
+            ),
           ],
         ),
       ),
