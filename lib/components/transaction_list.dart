@@ -11,7 +11,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 520,
       //equação ternaria para mostrar a imagem ou a lista
       child: transactions.isEmpty
           ? Column(
