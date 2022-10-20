@@ -115,7 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final availableHeight = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
-
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
@@ -128,24 +127,25 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 const Text("Exibir Grafico"),
                 Switch(
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          _showChart = value;
-                        },
-                      );
-                    }),
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        _showChart = value;
+                      },
+                    );
+                  },
+                ),
               ],
             ),
             if (_showChart)
               SizedBox(
-                height: availableHeight * 0.30,
+                height: availableHeight * 0.25,
                 child: Chart(_recentTransactions),
               ),
             if (!_showChart)
               SizedBox(
-                height: availableHeight * 0.70,
+                height: availableHeight * 0.75,
                 child: TransactionList(_transactions, _removeTransaction),
               ),
           ],

@@ -6,32 +6,35 @@ class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   final void Function(String) onRemove;
 
-  const TransactionList(this.transactions, this.onRemove, {super.key});
+  const TransactionList(this.transactions, this.onRemove, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? Column(
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Text(
-                'Nenhuma transação cadastrada',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              const SizedBox(
-                //definição de espaços
-                height: 20,
-              ),
-              SizedBox(
-                height: 200,
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit.cover,
-                ),
-              )
-            ],
+        ? LayoutBuilder(
+            builder: (ctx, constraints) {
+              return Column(
+                children: [
+                  SizedBox(height: constraints.maxHeight * 0.05),
+                  Container(
+                    height: constraints.maxHeight * 0.3,
+                    child: Text(
+                      'Nenhuma transação cadastrada',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ),
+                  SizedBox(height: constraints.maxHeight * 0.05),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.6,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              );
+            },
           )
         : ListView.builder(
             //' ListView.builder' definição dos elementos necessarios a serem exibidos -pouca memeoria do celular
@@ -66,7 +69,7 @@ class TransactionList extends StatelessWidget {
                     DateFormat('d MMM y').format(tr.date),
                   ),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     color: Theme.of(context).errorColor,
                     onPressed: () => onRemove(tr.id),
                   ),
