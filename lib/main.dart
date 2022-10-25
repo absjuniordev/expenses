@@ -1,4 +1,5 @@
 import 'package:expenses/components/transaction_form.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:math';
@@ -97,39 +98,49 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _getIconButton(IconData icon, Function() fn) {
+    return Platform.isIOS
+        ? GestureDetector(onTap: fn, child: Icon(icon))
+        : IconButton(icon: Icon(icon), onPressed: fn);
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    final appBar = AppBar(
-      centerTitle: true,
-      title: const Text(
-        'Despesas Pessoais',
-      ),
-      actions: [
-        if (isLandscape)
-          IconButton(
-            icon: Icon(_showChart ? Icons.list : Icons.show_chart),
-            onPressed: () {
-              setState(() {
-                _showChart = !_showChart;
-              });
-            },
-          ),
+    final iconList = Platform.isIOS ? CupertinoIcons.refresh : Icons.list;
+    final chartList =
+        Platform.isIOS ? CupertinoIcons.refresh : Icons.show_chart;
+
+    final actions = [
+      if (isLandscape)
         IconButton(
-          //Criação do botão superior
-          icon: const Icon(Icons.add),
-          onPressed: () => _openTransactionFormModal(context),
-        )
-      ],
+          icon: Icon(_showChart ? iconList : chartList),
+          onPressed: () {
+            setState(() {
+              _showChart = !_showChart;
+            });
+          },
+        ),
+      IconButton(
+        //Criação do botão superior
+        icon: const Icon(Icons.add),
+        onPressed: () => _openTransactionFormModal(context),
+      )
+    ];
+
+    final PreferredSizeWidget appBar = AppBar(
+      title: const Text('Despesas Pessoais'),
+      actions: actions,
     );
+
     final availableHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top;
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
+
+    final bodyPage = SafeArea(
+      child: SingleChildScrollView(
         //Funcção para rolar os itens
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -164,14 +175,31 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
-              //Criação do botão inferior
-              child: const Icon(Icons.add),
-              onPressed: () => _openTransactionFormModal(context),
-            ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            navigationBar: CupertinoNavigationBar(
+              middle: const Text('Despesas Pessoais'),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: actions,
+              ),
+            ),
+            child: bodyPage,
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: bodyPage,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    //Criação do botão inferior
+                    child: const Icon(Icons.add),
+                    onPressed: () => _openTransactionFormModal(context),
+                  ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+          );
   }
 }
