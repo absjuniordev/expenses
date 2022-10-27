@@ -10,7 +10,7 @@ import './components/chart.dart';
 
 main() => runApp(const ExpensesApp());
 
-class ExpensesApp extends StatelessWidget {
+class ExpensesApp extends StatelessWidget { 
   const ExpensesApp({super.key});
 
   @override
