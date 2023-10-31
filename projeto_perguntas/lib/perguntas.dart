@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Perguntas extends StatelessWidget {
-  const Perguntas({Key? key, this.onPressed, required this.text})
+class Respostas extends StatelessWidget {
+  const Respostas({Key? key, this.onPressed, required this.text})
       : super(key: key);
   final void Function()? onPressed;
   final String text;
@@ -13,7 +13,12 @@ class Perguntas extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(text),
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

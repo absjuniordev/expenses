@@ -23,11 +23,28 @@ class _PerguntaAppState extends State<PerguntaApp> {
     //   };
     // }
 
-    final List<String> _perguntas = [
-      'Qual é a sua cor favorita?',
-      'Qual é o seu animal favorito?',
+    final List<Map<String, Object>> _perguntas = [
+      {
+        'texto': 'Qual é a sua cor favorita?',
+        'respostas': ['Preta', 'Vermelho', 'Branco', 'Verde']
+      },
+      {
+        'texto': 'Qual é o seu animal favorito?',
+        'respostas': ['Coelho', 'Pato', 'Leão', 'Ovelha']
+      },
+      {
+        'texto': 'Qual é o seu time favorito?',
+        'respostas': ['Vitoria', 'Vasco', 'Bahia', 'Palmeiras']
+      },
     ];
-
+    List respostas = [];
+    for (var textResposta
+        in _perguntas[perguntaSelecionada].cast()['respostas']) {
+      respostas.add(Respostas(
+        text: textResposta,
+        onPressed: responder,
+      ));
+    }
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,21 +55,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
           ),
           body: Column(
             children: [
-              Questao(text: _perguntas[perguntaSelecionada]),
-              Perguntas(
-                onPressed: responder,
-                text: 'Resposta 1',
-              ),
-
-              Perguntas(
-                onPressed: responder,
-                text: 'Resposta 2',
-              ),
-
-              Perguntas(
-                onPressed: responder,
-                text: 'Resposta 3',
-              ),
+              Questao(
+                  text: _perguntas[perguntaSelecionada]['texto'].toString()),
+              ...respostas,
 
               //resumo
               //onPressed: responder() = manda um outro executar o serviço
