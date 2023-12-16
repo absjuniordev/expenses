@@ -44,15 +44,15 @@ class _PerguntaAppState extends State<PerguntaApp> {
       },
     ];
 
-    //51. Lista para Widgets #01
+    // Lista para Widgets #01 e #02
     List respostas = perguntas[perguntaSelecionada].cast()['respostas'];
-    //Evolução
-    List<Widget> widgets = respostas
-        .map((e) => Respostas(
-              text: e,
-              onPressed: responder,
-            ))
-        .toList();
+    //Evolução 02
+    // List<Widget> widgets = respostas
+    // .map((e) => Respostas(
+    //       text: e,
+    //       onPressed: responder,
+    //     ))
+    // .toList();
 
     // for (var textResposta in respostas) {
     //   widgets.add(Respostas(
@@ -73,7 +73,14 @@ class _PerguntaAppState extends State<PerguntaApp> {
               //indice e a chave
               text: perguntas[perguntaSelecionada]['texto'].toString(),
             ),
-            ...widgets,
+            //"..." spread
+            //Evolução 03
+            ...respostas
+                .map((e) => Respostas(
+                      text: e,
+                      onPressed: responder,
+                    ))
+                .toList(),
 
             //resumo
             //onPressed: responder() = manda um outro executar o serviço
