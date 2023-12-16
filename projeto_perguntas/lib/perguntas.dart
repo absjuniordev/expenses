@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Respostas extends StatelessWidget {
-  const Respostas({Key? key, this.onPressed, required this.text})
+  const Respostas({Key? key, required this.onPressed, required this.text})
       : super(key: key);
-  final void Function()? onPressed;
+  final void Function() onPressed;
   final String text;
   @override
   Widget build(BuildContext context) {
