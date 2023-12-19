@@ -10,46 +10,48 @@ class PerguntaApp extends StatefulWidget {
   const PerguntaApp({super.key});
 
   @override
-  _PerguntaAppState createState() => _PerguntaAppState();
+  State<PerguntaApp> createState() => _PerguntaAppState();
 }
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var pontuacaoTotal = 0;
   final _perguntas = const [
     {
       'texto': 'Qual é a sua cor favorita?',
       'respostas': [
-        {'texto': 'Preta', 'nota': 10},
-        {'texto': 'Vermelho', 'nota': 8},
-        {'texto': 'Branco', 'nota': 3},
-        {'texto': 'Verde', 'nota': 6},
+        {'texto': 'Preta', 'pontuacao': 10},
+        {'texto': 'Vermelho', 'pontuacao': 8},
+        {'texto': 'Branco', 'pontuacao': 3},
+        {'texto': 'Verde', 'pontuacao': 6},
       ]
     },
     {
       'texto': 'Qual é o seu animal favorito?',
       'respostas': [
-        {'texto': 'Coelho', 'nota': 9},
-        {'texto': 'Pato', 'nota': 5},
-        {'texto': 'Leão', 'nota': 7},
-        {'texto': 'Ovelha', 'nota': 3},
+        {'texto': 'Coelho', 'pontuacao': 9},
+        {'texto': 'Pato', 'pontuacao': 5},
+        {'texto': 'Leão', 'pontuacao': 7},
+        {'texto': 'Ovelha', 'pontuacao': 3},
       ]
     },
     {
       'texto': 'Qual é o seu time favorito?',
       'respostas': [
-        {'texto': 'Vitoria', 'nota': 10},
-        {'texto': 'Vasco', 'nota': 7},
-        {'texto': 'Bahia', 'nota': 1},
-        {'texto': 'Palmeiras', 'nota': 5},
+        {'texto': 'Vitoria', 'pontuacao': 10},
+        {'texto': 'Vasco', 'pontuacao': 7},
+        {'texto': 'Bahia', 'pontuacao': 1},
+        {'texto': 'Palmeiras', 'pontuacao': 5},
       ]
     },
   ];
 
-  responder() {
+  responder(int pontuacao) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
       });
+      pontuacaoTotal += pontuacao;
     }
   }
 
@@ -81,7 +83,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
             ? Questionario(
                 perguntaSelecionada: _perguntaSelecionada,
                 perguntas: _perguntas,
-                responder: responder,
+                qundoResponder: responder,
               )
             : const Resultado(),
       ),
