@@ -85,7 +85,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 perguntas: _perguntas,
                 qundoResponder: responder,
               )
-            : const Resultado(),
+            : Resultado(pontuacao: pontuacaoTotal),
       ),
     );
   }
