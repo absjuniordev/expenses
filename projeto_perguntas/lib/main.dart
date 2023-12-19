@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_perguntas/perguntas.dart';
-import 'questao.dart';
+import 'package:projeto_perguntas/questionario.dart';
+import 'package:projeto_perguntas/resultado.dart';
 
 void main() {
   runApp(const PerguntaApp());
@@ -44,79 +44,31 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    // void Function() perguntaRespondida() {
-    //   return () {
-    //     print("Pergunta respondida #2");
-    //   };
-    // }
-
-    // Lista para Widgets #01 e #02
-    List respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['respostas']
-        : [];
-    //Evolução 02
-    // List<Widget> widgets = respostas
-    // .map((e) => Respostas(
-    //       text: e,
-    //       onPressed: responder,
-    //     ))
-    // .toList();
-
-    // for (var textResposta in respostas) {
-    //   widgets.add(Respostas(
-    //     text: textResposta,
-    //     onPressed: responder,
-    //   ));
-    // }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        floatingActionButton: temPerguntaSelecionada
+            ? null
+            : FloatingActionButton(
+                onPressed: () {
+                  setState(() {
+                    _perguntaSelecionada = 0;
+                  });
+                },
+                child: const Text("Retorne"),
+              ),
         appBar: AppBar(
+          backgroundColor: Colors.purple,
           centerTitle: true,
           title: const Text("Perguntas"),
         ),
         body: temPerguntaSelecionada
-            ? Column(
-                children: [
-                  Questao(
-                    //indice e a chave
-                    text: _perguntas[_perguntaSelecionada]['texto'].toString(),
-                  ),
-                  //"..." spread
-                  //Evolução 03
-                  ...respostas
-                      .map((e) => Respostas(text: e, onPressed: responder))
-                      .toList(),
-
-                  //resumo
-                  //onPressed: responder() = manda um outro executar o serviço
-                  //onPressed: responder = ele mesmo executa o serviço
-                  // ElevatedButton(
-                  //   child: const Text('Exemplo 1'),
-                  //   onPressed: () {
-                  //     // invocando a função
-                  //     responder();
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   //passando a função como parametro
-                  //   onPressed: perguntaRespondida(),
-                  //   child: const Text('Exemplo 2'),
-                  // ),
-                  // ElevatedButton(
-                  //   //passando uam função como parametro
-                  //   onPressed: responder,
-                  //   child: const Text('Exemplo 3'),
-                  // ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     responder();
-                  //   },
-                  //   child: const Text('Exemplo 4'),
-                  // ),
-                ],
+            ? Questionario(
+                perguntaSelecionada: _perguntaSelecionada,
+                perguntas: _perguntas,
+                responder: responder,
               )
-            : null,
+            : const Resultado(),
       ),
     );
   }
