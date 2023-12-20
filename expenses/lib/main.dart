@@ -37,6 +37,12 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
       id: 't2',
     ),
+    Transaction(
+      title: "Conta de Agua",
+      value: 85,
+      date: DateTime.now(),
+      id: 't3',
+    ),
   ];
   MyHomePage({super.key});
 
@@ -64,8 +70,19 @@ class MyHomePage extends StatelessWidget {
             children: [
               ..._transaction.map((tr) {
                 return Card(
-                  child: Text(tr.title),
-                );
+                    child: Row(
+                  children: [
+                    Text(
+                      tr.value.toString(),
+                    ),
+                    Column(
+                      children: [
+                        Text(tr.title),
+                        Text(tr.date.toString()),
+                      ],
+                    )
+                  ],
+                ));
               }).toList(),
             ],
           )
