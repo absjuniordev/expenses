@@ -35,8 +35,19 @@ class MyHomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: const Center(
-        child: Text("Versão inicial!"),
+      body: const Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: Card(
+              elevation: 5,
+              child: Text("Grafico"),
+            ),
+          ),
+          Card(
+            child: Text("Versão inicial!"),
+          ),
+        ],
       ),
     );
   }
