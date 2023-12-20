@@ -50,19 +50,25 @@ class MyHomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: const Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Card(
               elevation: 5,
               child: Text("Grafico"),
             ),
           ),
-          Card(
-            child: Text("Versão inicial!"),
-          ),
+          Column(
+            children: [
+              ..._transaction.map((tr) {
+                return Card(
+                  child: Text(tr.title),
+                );
+              }).toList(),
+            ],
+          )
         ],
       ),
     );
