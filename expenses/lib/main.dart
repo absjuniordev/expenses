@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
       context: context,
       builder: ((context) {
-        return TransactionForm((p0, p1) {});
+        return TransactionForm(_addTransacton);
       }),
     );
   }
