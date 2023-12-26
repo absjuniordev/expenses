@@ -2,8 +2,6 @@ import 'dart:math';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:expenses/models/transaction.dart';
-import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 
 void main() {
@@ -18,10 +16,11 @@ class ExpensesApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-        ),
-        useMaterial3: true,
+        // primarySwatch: Colors.purple,
+        primaryColor: Colors.purple,
+        // colorScheme: ColorScheme.fromSwatch(
+        //   accentColor: Colors.black,
+        // ),
       ),
       home: const MyHomePage(),
     );
@@ -68,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transaction.add(newTranaction);
     });
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           "Despesas Pessoais",
           style: TextStyle(color: Colors.white),
