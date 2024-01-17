@@ -1,11 +1,12 @@
-import 'dart:ffi';
-
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
-  const Chart({super.key, required this.recentTransaction});
+  const Chart({
+    super.key,
+    required this.recentTransaction,
+  });
 
   final List<Transaction> recentTransaction;
   List<Map<String, Object>> get groupedTransactions {
@@ -37,6 +38,8 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    groupedTransactions;
+
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),

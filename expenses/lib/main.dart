@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
@@ -50,25 +51,42 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transaction = [
-    // Transaction(
-    //   title: "Novo Tenis",
-    //   value: 310.76,
-    //   date: DateTime.now(),
-    //   id: 't1',
-    // ),
-    // Transaction(
-    //   title: "Conta de Energia",
-    //   value: 210,
-    //   date: DateTime.now(),
-    //   id: 't2',
-    // ),
-    // Transaction(
-    //   title: "Conta de Energia",
-    //   value: 210,
-    //   date: DateTime.now(),
-    //   id: 't3',
-    // ),
+    Transaction(
+      title: "Novo Tenis",
+      value: 310.76,
+      date: DateTime.now().subtract(Duration(days: 3)),
+      id: 't1',
+    ),
+    Transaction(
+      title: "Conta de Energia",
+      value: 210,
+      date: DateTime.now().subtract(Duration(days: 4)),
+      id: 't2',
+    ),
+    Transaction(
+      title: "Conta de Energia",
+      value: 210,
+      date: DateTime.now().subtract(Duration(days: 5)),
+      id: 't3',
+    ),
+    Transaction(
+      title: "Conta net",
+      value: 210,
+      date: DateTime.now().subtract(Duration(days: 50)),
+      id: 't4',
+    ),
   ];
+
+  ///Retornara verdadeiro para cada item dentro de 7 dias
+  List<Transaction> get _recentTransactions {
+    return _transaction.where((tr) {
+      return tr.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   _addTransacton(String title, double value) {
     final newTranaction = Transaction(
@@ -123,12 +141,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(
-              child: Card(
-                elevation: 5,
-                child: Text("Grafico"),
-              ),
+            Chart(
+              recentTransaction: _recentTransactions,
             ),
+            //  SizedBox(
+            //     child: Card(
+            //       elevation: 5,
+            //       child: Text("Grafico"),
+            //     ),
+            //     ),
             TransactionList(transactions: _transaction),
           ],
         ),
