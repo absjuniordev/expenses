@@ -47,11 +47,11 @@ class TransactionList extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                      radius: 32,
+                      radius: 40,
                       child: Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(4),
                         child: FittedBox(
-                          child: Text("R\$${tr.value}"),
+                          child: Text("R\$ ${tr.value.toStringAsFixed(2)}"),
                         ),
                       ),
                     ),
