@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Transaction(
       title: "Conta net",
       value: 210,
-      date: DateTime.now().subtract(Duration(days: 50)),
+      date: DateTime.now().subtract(const Duration(days: 50)),
       id: 't4',
     ),
   ];
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return _transaction.where((tr) {
       return tr.date.isAfter(
         DateTime.now().subtract(
-          Duration(days: 7),
+          const Duration(days: 7),
         ),
       );
     }).toList();
