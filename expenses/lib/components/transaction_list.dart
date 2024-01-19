@@ -12,26 +12,23 @@ class TransactionList extends StatelessWidget {
     return SizedBox(
       height: 500,
       child: transactions.isEmpty
-          ? Expanded(
-              child: Column(
-                children: [
-                  const Spacer(flex: 1),
-                  Text(
-                    "Nenhuma transação cadastrada",
-                    style: Theme.of(context).textTheme.titleLarge,
+          ? Column(
+              children: [
+                Text(
+                  "Nenhuma transação cadastrada",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
                   ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: Image.asset(
-                      'assets/images/waiting.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             )
           : ListView.builder(
               //Otimização , somente carregara o necesario
