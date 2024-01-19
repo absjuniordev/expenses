@@ -16,10 +16,10 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("R\$${value.toStringAsFixed(2)}"),
+        FittedBox(child: Text("${value.toStringAsFixed(2)}")),
         const SizedBox(height: 5),
         Container(
-          height: 60,
+          height: 70,
           width: 10,
           color: const Color.fromRGBO(220, 220, 220, 1),
           child: Stack(
