@@ -55,6 +55,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transaction = [];
+  bool _showCart = false;
 
   ///Retornara verdadeiro para cada item dentro de 7 dias
   List<Transaction> get _recentTransactions {
@@ -132,19 +133,34 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: availableHieght * 0.25,
-              child: Chart(
-                recentTransaction: _recentTransactions,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Exibir Grafico"),
+                Switch(
+                    value: _showCart,
+                    onChanged: (value) {
+                      setState(() {
+                        _showCart = value;
+                      });
+                    }),
+              ],
             ),
-            SizedBox(
-              height: availableHieght * 0.7,
-              child: TransactionList(
-                transactions: _transaction,
-                onRemove: _removeTransaction,
+            if (_showCart)
+              SizedBox(
+                height: availableHieght * 0.25,
+                child: Chart(
+                  recentTransaction: _recentTransactions,
+                ),
               ),
-            ),
+            if (!_showCart)
+              SizedBox(
+                height: availableHieght * 0.7,
+                child: TransactionList(
+                  transactions: _transaction,
+                  onRemove: _removeTransaction,
+                ),
+              ),
           ],
         ),
       ),
