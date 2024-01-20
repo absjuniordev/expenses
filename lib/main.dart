@@ -98,40 +98,52 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      backgroundColor: Theme.of(context).primaryColor,
+      title: const Text(
+        "Despesas Pessoais",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () => _openTransactionFormModal(context),
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        )
+      ],
+    );
+
+    final availableHieght = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openTransactionFormModal(context),
         child: const Icon(Icons.add),
       ),
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: const Text(
-          "Despesas Pessoais",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => _openTransactionFormModal(context),
-            icon: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          )
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(
-              recentTransaction: _recentTransactions,
+            SizedBox(
+              height: availableHieght * 0.25,
+              child: Chart(
+                recentTransaction: _recentTransactions,
+              ),
             ),
-            TransactionList(
-              transactions: _transaction,
-              onRemove: _removeTransaction,
+            SizedBox(
+              height: availableHieght * 0.7,
+              child: TransactionList(
+                transactions: _transaction,
+                onRemove: _removeTransaction,
+              ),
             ),
           ],
         ),
