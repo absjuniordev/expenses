@@ -99,6 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       backgroundColor: Theme.of(context).primaryColor,
       title: const Text(
@@ -108,13 +111,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       actions: [
+        if (isLandscape)
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _showCart = !_showCart;
+              });
+            },
+            icon: Icon(
+              _showCart ? Icons.list : Icons.pie_chart,
+              color: Colors.white,
+            ),
+          ),
         IconButton(
           onPressed: () => _openTransactionFormModal(context),
           icon: const Icon(
             Icons.add,
             color: Colors.white,
           ),
-        )
+        ),
       ],
     );
 
@@ -133,27 +148,28 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Exibir Grafico"),
-                Switch(
-                    value: _showCart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showCart = value;
-                      });
-                    }),
-              ],
-            ),
-            if (_showCart)
+            // if(isLandscape)
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     const Text("Exibir Grafico"),
+            //     Switch(
+            //         value: _showCart,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _showCart = value;
+            //           });
+            //         }),
+            //   ],
+            // ),
+            if (_showCart || !isLandscape)
               SizedBox(
-                height: availableHieght * 0.25,
+                height: availableHieght * (isLandscape ? 0.9 : 0.25),
                 child: Chart(
                   recentTransaction: _recentTransactions,
                 ),
               ),
-            if (!_showCart)
+            if (!_showCart || isLandscape)
               SizedBox(
                 height: availableHieght * 0.7,
                 child: TransactionList(
