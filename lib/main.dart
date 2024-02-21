@@ -18,7 +18,6 @@ class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
@@ -108,13 +107,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     bool isLandscape = mediaQuery.orientation == Orientation.landscape;
+
     final iconList = Platform.isIOS ? CupertinoIcons.refresh : Icons.list;
-    final chartList = Platform.isIOS ? CupertinoIcons.refresh : Icons.show_chart;
+    final chartList =
+        Platform.isIOS ? CupertinoIcons.refresh : Icons.show_chart;
 
     final actions = [
       if (isLandscape)
         _getIconButton(
-          _showChart ? iconList: chartList,
+          _showChart ? iconList : chartList,
           () {
             setState(() {
               _showChart = !_showChart;
