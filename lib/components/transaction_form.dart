@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'package:expenses/components/adaptative_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -48,12 +49,11 @@ class _TransactionFormState extends State<TransactionForm> {
       child: Card(
         elevation: 5,
         child: Padding(
-          padding:  EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
-            bottom: 10 + MediaQuery.of(context).viewInsets.bottom
-          ),
+          padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: 10 + MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             children: [
               TextField(
@@ -93,18 +93,10 @@ class _TransactionFormState extends State<TransactionForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                    ),
+                  AdaptativeButton(
+                    label: 'Nova Transação ',
                     onPressed: _submitForm,
-                    child: const Text(
-                      "Nova Transação",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
             ],
