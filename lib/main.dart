@@ -100,8 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _getIconButton(IconData icon, Function() fn) {
     return Platform.isIOS
-        ? GestureDetector(onTap: fn, child: Icon(icon))
-        : IconButton(icon: Icon(icon), onPressed: fn);
+        ? GestureDetector(
+            onTap: fn,
+            child: Icon(
+              icon,
+              color: Colors.white,
+            ))
+        : IconButton(icon: Icon(icon, color: Colors.white), onPressed: fn);
   }
 
   @override
@@ -130,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     final PreferredSizeWidget appBar = AppBar(
+      backgroundColor: Colors.purple,
       title: const Text('Despesas Pessoais'),
       actions: actions,
     );
@@ -162,12 +168,12 @@ class _MyHomePageState extends State<MyHomePage> {
             if (_showChart || !isLandscape)
               SizedBox(
                 height: availableHeight * (isLandscape ? 0.8 : 0.3),
-                child: Chart(  _recentTransactions),
+                child: Chart(_recentTransactions),
               ),
             if (!_showChart || !isLandscape)
               SizedBox(
                 height: availableHeight * (isLandscape ? 1 : 0.7),
-                child: TransactionList(  _transactions,   _removeTransaction),
+                child: TransactionList(_transactions, _removeTransaction),
               ),
           ],
         ),
