@@ -4,11 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdaptativeButton extends StatelessWidget {
-  const AdaptativeButton(
-      {super.key, required this.label, required this.onPressed});
+  const AdaptativeButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
 
   final String label;
-  final Function onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,6 @@
 
 import 'package:expenses/components/adaptative_button.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'adaptative_date_picker.dart';
 import 'adaptative_text_field.dart';
@@ -47,12 +46,12 @@ class _TransactionFormState extends State<TransactionForm> {
               AdaptativeTextField(
                 label: 'Titulo',
                 controller: _titleController,
-                onSubimited: () => _submitForm(),
+                onSubmitted: (_) => _submitForm(),
               ),
               AdaptativeTextField(
                 label: 'Valor (R\$)',
                 controller: _valueController,
-                onSubimited: () => _submitForm(),
+                onSubmitted: (_) => _submitForm(),
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
               ),

@@ -6,7 +6,9 @@ class AdaptativeTextField extends StatelessWidget {
   final String? label;
   final TextEditingController? controller;
   final TextInputType keyboardType;
-  final Function(String)? onSubmitted;
+  final Function(
+    String,
+  )? onSubmitted;
 
   const AdaptativeTextField({
     this.label,
@@ -26,7 +28,11 @@ class AdaptativeTextField extends StatelessWidget {
             child: CupertinoTextField(
               controller: controller,
               keyboardType: keyboardType,
-              onSubmitted: onSubmitted,
+              onSubmitted: (value) {
+                if (onSubmitted != null) {
+                  onSubmitted!(value);
+                }
+              },
               placeholder: label,
               padding: const EdgeInsets.symmetric(
                 horizontal: 6,
