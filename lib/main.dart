@@ -18,6 +18,7 @@ class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
@@ -25,13 +26,13 @@ class ExpensesApp extends StatelessWidget {
           secondary: Colors.amber,
         ),
         textTheme: tema.textTheme.copyWith(
-          headline6: const TextStyle(
+          titleLarge: const TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          button: const TextStyle(
+          labelLarge: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -99,8 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _getIconButton(IconData icon, Function() fn) {
     return Platform.isIOS
-        ? GestureDetector(onTap: fn, child: Icon(icon))
-        : IconButton(icon: Icon(icon), onPressed: fn);
+        ? GestureDetector(
+            onTap: fn,
+            child: Icon(
+              icon,
+              color: Colors.white,
+            ))
+        : IconButton(icon: Icon(icon, color: Colors.white), onPressed: fn);
   }
 
   @override
@@ -129,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     final PreferredSizeWidget appBar = AppBar(
+      backgroundColor: Colors.purple,
       title: const Text('Despesas Pessoais'),
       actions: actions,
     );
@@ -161,12 +168,12 @@ class _MyHomePageState extends State<MyHomePage> {
             if (_showChart || !isLandscape)
               SizedBox(
                 height: availableHeight * (isLandscape ? 0.8 : 0.3),
-                child: Chart(recentTransaction:  _recentTransactions),
+                child: Chart(_recentTransactions),
               ),
             if (!_showChart || !isLandscape)
               SizedBox(
                 height: availableHeight * (isLandscape ? 1 : 0.7),
-                child: TransactionList(transactions:  _transactions, onRemove:  _removeTransaction),
+                child: TransactionList(_transactions, _removeTransaction),
               ),
           ],
         ),
